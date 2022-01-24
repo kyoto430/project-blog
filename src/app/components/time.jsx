@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const Time = ({ update }) => {
   const renderTime = (number) => {
@@ -16,6 +17,10 @@ const Time = ({ update }) => {
       </small>
     </p>
   )
+}
+
+Time.propTypes = {
+  update: PropTypes.number.isRequired,
 }
 
 export default Time

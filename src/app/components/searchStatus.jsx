@@ -1,11 +1,16 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const SearchStatus = ({ length }) => {
   return (
-    <h2 className={'badge bg-' + (length > 0 ? 'primary' : 'danger')}>
-      {length ? `Статей:${length}` : `Статьи отсутствуют!`}
-    </h2>
+    <div className={'badge bg-' + (length > 0 ? 'primary' : 'danger')}>
+      {length ? <h3>Статей: {length}</h3> : <h3>Статьи отсутствуют!</h3>}
+    </div>
   )
+}
+
+SearchStatus.propTypes = {
+  length: PropTypes.number.isRequired,
 }
 
 export default SearchStatus

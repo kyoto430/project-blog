@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import API from './api'
 import Articles from './components/articles'
-import SearchStatus from './components/searchStatus'
 
 function App() {
   const [articles, setArticles] = useState(API.articles.fetchAll())
@@ -21,7 +20,6 @@ function App() {
   }
   return (
     <div>
-      <SearchStatus length={articles.length} />
       <Articles
         onDelete={handleDelete}
         onToggleBookMark={handleToggleBookMark}

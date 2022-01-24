@@ -18,8 +18,8 @@ const Article = ({
   return (
     <div
       key={_id}
-      className="card text-white bg-dark mb-3"
-      style={{ maxWidth: '540px' }}
+      className="card text-white bg-dark m-3"
+      style={{ maxWidth: '500px' }}
     >
       <div className="row g-0">
         <div className="col-md-4">

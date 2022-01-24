@@ -1,7 +1,4 @@
-const ligues = {
-  england: { _id: '67rdca18', name: 'Англия' },
-  spain: { _id: '67rdca20', name: 'Испания' },
-}
+import { ligues } from './ligues.api'
 
 const tags = {
   new: { _id: '67rdca188', name: 'Новое', color: 'success' },
@@ -25,6 +22,15 @@ const articles = [
     ligue: ligues.spain,
     tags: [tags.new, tags.gossip],
     update: 1,
+    image: 'https://picsum.photos/200',
+  },
+  {
+    _id: '67rdca1817',
+    title: 'Chelsea 2022',
+    text: 'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.',
+    ligue: ligues.england,
+    tags: [tags.new],
+    update: 45,
     image: 'https://picsum.photos/200',
   },
 ]
