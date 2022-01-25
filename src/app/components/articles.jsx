@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import Article from './article'
+import _ from 'lodash'
 import Pagination from './pagination'
 import { paginate } from '../utils/paginate'
 import GroupList from './groupList'
 import SearchStatus from './searchStatus'
 import API from '../api'
+import ArticlesGroup from './articlesGroup'
 
 const Articles = ({ articles, ...rest }) => {
   const pageSize = 2
   const [currentPage, setCurrentPage] = useState(1)
   const [ligues, setLigues] = useState()
   const [selectedLigue, setSelectedLigue] = useState()
+  const [sortBy, setSortBy] = useState({ iter: 'title', order: 'asc' })
 
   useEffect(() => {
     API.ligues.fetchAll().then((data) => setLigues(data))
@@ -20,6 +22,9 @@ const Articles = ({ articles, ...rest }) => {
     setCurrentPage(1)
   }, [selectedLigue])
 
+  const handleSort = (item) => {
+    setSortBy(item)
+  }
   const handlePageChange = (pageIndex) => {
     setCurrentPage(pageIndex)
   }
@@ -31,15 +36,23 @@ const Articles = ({ articles, ...rest }) => {
   }
 
   const filteredArticles = selectedLigue
-    ? articles.filter((article) => article.ligue === selectedLigue)
+    ? articles.filter(
+        (article) =>
+          JSON.stringify(article.ligue) === JSON.stringify(selectedLigue)
+      )
     : articles
   const count = filteredArticles.length
-  const articleCrop = paginate(filteredArticles, currentPage, pageSize)
+  const sortedArticles = _.orderBy(
+    filteredArticles,
+    [sortBy.iter],
+    [sortBy.order]
+  )
+  const articleCrop = paginate(sortedArticles, currentPage, pageSize)
 
   return (
     <div className="d-flex">
       {ligues && (
-        <div className="d-flex flex-column p-3">
+        <div className="col-2 d-flex flex-column p-3">
           <GroupList
             items={ligues}
             onItemSelect={handleLiguesSelect}
@@ -50,12 +63,16 @@ const Articles = ({ articles, ...rest }) => {
           </button>
         </div>
       )}
-      <div className="d-flex flex-column p-3">
+      <div className="col-10 d-flex flex-column align-items-center p-3">
         <SearchStatus length={count} />
-        {count &&
-          articleCrop.map((article) => (
-            <Article key={article._id} {...rest} {...article} />
-          ))}
+        {count && (
+          <ArticlesGroup
+            articles={articleCrop}
+            onSort={handleSort}
+            selectedSort={sortBy}
+            {...rest}
+          />
+        )}
         <div className="d-flex justify-content-center">
           <Pagination
             itemsCount={count}

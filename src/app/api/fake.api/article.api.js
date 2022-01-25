@@ -1,4 +1,4 @@
-import { ligues } from './ligues.api'
+import { liguesObject as ligues } from './ligues.api'
 
 const tags = {
   new: { _id: '67rdca188', name: 'Новое', color: 'success' },
@@ -13,7 +13,8 @@ const articles = [
     ligue: ligues.england,
     tags: [tags.new, tags.gossip],
     update: 120,
-    image: 'https://picsum.photos/200',
+    image: 'https://picsum.photos/300',
+    bookmark: false,
   },
   {
     _id: '67rdca1816',
@@ -22,7 +23,8 @@ const articles = [
     ligue: ligues.spain,
     tags: [tags.new, tags.gossip],
     update: 1,
-    image: 'https://picsum.photos/200',
+    image: 'https://picsum.photos/300',
+    bookmark: false,
   },
   {
     _id: '67rdca1817',
@@ -31,10 +33,18 @@ const articles = [
     ligue: ligues.england,
     tags: [tags.new],
     update: 45,
-    image: 'https://picsum.photos/200',
+    image: 'https://picsum.photos/300',
+    bookmark: false,
   },
 ]
 
-export function fetchAll() {
-  return articles
+const fetchAll = () =>
+  new Promise((resolve) => {
+    window.setTimeout(function () {
+      resolve(articles)
+    }, 2000)
+  })
+
+export default {
+  fetchAll,
 }

@@ -2,8 +2,8 @@ import React from 'react'
 
 const BookMark = ({ status, ...rest }) => {
   return (
-    <button {...rest}>
-      <i className={'bi bi-bookmark' + (status ? '-heart-fill' : '')}></i>
+    <button className="btn btn-success" {...rest}>
+      <i className={'bi bi-star' + (status ? '-fill' : '')}></i>
     </button>
   )
 }

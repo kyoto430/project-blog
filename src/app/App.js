@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import API from './api'
 import Articles from './components/articles'
 
 function App() {
-  const [articles, setArticles] = useState(API.articles.fetchAll())
+  const [articles, setArticles] = useState()
+  useEffect(() => {
+    API.articles.fetchAll().then((data) => setArticles(data))
+  }, [])
   const handleDelete = (articleId) => {
     setArticles(articles.filter((article) => article._id !== articleId))
   }
@@ -11,7 +14,8 @@ function App() {
     setArticles(
       articles.map((article) => {
         if (article._id === id) {
-          return { ...article, bookmark: !article.bookmark }
+          article.bookmark = !article.bookmark
+          return article
         }
         return article
       })
@@ -20,11 +24,13 @@ function App() {
   }
   return (
     <div>
-      <Articles
-        onDelete={handleDelete}
-        onToggleBookMark={handleToggleBookMark}
-        articles={articles}
-      />
+      {articles && (
+        <Articles
+          onDelete={handleDelete}
+          onToggleBookMark={handleToggleBookMark}
+          articles={articles}
+        />
+      )}
     </div>
   )
 }

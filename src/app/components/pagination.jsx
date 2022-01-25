@@ -8,7 +8,7 @@ const Pagination = ({ onPageChange, itemsCount, pageSize, currentPage }) => {
   const pages = _.range(1, pageCount + 1)
   return (
     <nav>
-      <ul className="pagination">
+      <ul className="pagination" role={'button'}>
         {pages.map((page) => (
           <li
             key={page}
