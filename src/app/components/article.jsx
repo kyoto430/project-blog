@@ -1,6 +1,6 @@
 import React from 'react'
 import BookMark from './bookmark'
-import Tag from './tag'
+import TagsList from './tagsList'
 import Time from './time'
 
 const Article = ({
@@ -25,15 +25,11 @@ const Article = ({
           <div className="card-body">
             <div className="d-flex justify-content-end align-items-center">
               <span className="badge bg-white text-dark m-1">{ligue.name}</span>
-              {tags.map((tag) => (
-                <Tag key={tag._id} {...tag} />
-              ))}
+              <TagsList tags={tags} />
             </div>
-
             <h5 className="card-title">{title}</h5>
             <p className="card-text">{text}</p>
             <Time update={update} />
-
             <div className="d-flex justify-content-between">
               <button className="btn btn-sm btn-primary">Открыть</button>
               <BookMark

@@ -20,7 +20,7 @@ const Time = ({ update }) => {
 }
 
 Time.propTypes = {
-  update: PropTypes.number.isRequired,
+  update: PropTypes.number,
 }
 
 export default Time

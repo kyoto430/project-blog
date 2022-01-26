@@ -12,6 +12,16 @@ const GroupHeader = ({ onSort, selectedSort, columns }) => {
       onSort({ iter: item, order: 'asc' })
     }
   }
+  const renderSortArrow = (selectedSort, currentPath) => {
+    if (selectedSort.iter === currentPath) {
+      if (selectedSort.order === 'asc') {
+        return <i className="bi bi-caret-down-fill"></i>
+      } else {
+        return <i className="bi bi-caret-up-fill"></i>
+      }
+    }
+    return null
+  }
   return (
     <div className="d-flex mt-1 flex-wrap">
       <div className="m-1 fw-bold fs-6">Сортировать по:</div>
@@ -24,6 +34,7 @@ const GroupHeader = ({ onSort, selectedSort, columns }) => {
           role={'button'}
         >
           {columns[column].title}
+          {renderSortArrow(selectedSort, columns[column].iter)}
         </span>
       ))}
     </div>

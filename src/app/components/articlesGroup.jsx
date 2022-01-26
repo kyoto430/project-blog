@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Article from './article'
 import GroupHeader from './groupHeader'
 
-const ArticlesGroup = ({ articles, onSort, selectedSort, ...rest }) => {
+const ArticlesGroup = ({ articles, onSort, selectedSort }) => {
   const columns = {
     title: { iter: 'title', title: 'названию' },
     ligues: { iter: 'ligue.name', title: 'лиге' },
@@ -14,7 +14,7 @@ const ArticlesGroup = ({ articles, onSort, selectedSort, ...rest }) => {
     <>
       <GroupHeader {...{ onSort, selectedSort, columns }} />
       {articles.map((article) => (
-        <Article key={article._id} {...rest} {...article} />
+        <Article key={article._id} {...article} />
       ))}
     </>
   )
