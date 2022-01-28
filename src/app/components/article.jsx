@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import BookMark from './bookmark'
 import TagsList from './tagsList'
 import Time from './time'
@@ -30,16 +31,15 @@ const Article = ({
             <h5 className="card-title">{title}</h5>
             <p className="card-text">{text}</p>
             <Time update={update} />
-            <div className="d-flex justify-content-between">
-              <button className="btn btn-sm btn-primary">Открыть</button>
+            <div className="d-flex justify-content-between align-items-center">
+              <Link to={`/articles/${_id}`}>
+                <button className="btn btn btn-primary">Открыть</button>
+              </Link>
               <BookMark
                 status={bookmark}
                 onClick={() => onToggleBookMark(_id)}
               />
-              <button
-                className="btn btn-sm btn-danger"
-                onClick={() => onDelete(_id)}
-              >
+              <button className="btn btn-danger" onClick={() => onDelete(_id)}>
                 Удалить
               </button>
             </div>

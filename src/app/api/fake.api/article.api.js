@@ -45,6 +45,14 @@ const fetchAll = () =>
     }, 2000)
   })
 
+const getById = (id) =>
+  new Promise((resolve) => {
+    window.setTimeout(function () {
+      resolve(articles.find((article) => article._id === id))
+    }, 1000)
+  })
+
 export default {
   fetchAll,
+  getById,
 }

@@ -8,7 +8,7 @@ import API from '../api'
 import ArticlesGroup from './articlesGroup'
 import Loader from './loader'
 
-const Articles = () => {
+const ArticlesList = () => {
   const pageSize = 3
   const [currentPage, setCurrentPage] = useState(1)
   const [ligues, setLigues] = useState()
@@ -86,7 +86,7 @@ const Articles = () => {
         )}
         <div className="col-10 d-flex flex-column align-items-center p-3">
           <SearchStatus length={count} />
-          {count && (
+          {count > 0 && (
             <ArticlesGroup
               articles={articleCrop}
               onSort={handleSort}
@@ -110,4 +110,4 @@ const Articles = () => {
   return <Loader />
 }
 
-export default Articles
+export default ArticlesList
