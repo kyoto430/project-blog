@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import API from '../api'
-import Loader from './loader'
-import TagsList from './tagsList'
+import API from '../../../api'
+import Loader from '../loader'
+import TagsList from '../../UI/tags/tagsList'
 import { useHistory } from 'react-router-dom'
 
 const ArticlePage = ({ articleId }) => {

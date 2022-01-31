@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import BookMark from './bookmark'
-import TagsList from './tagsList'
-import Time from './time'
+import BookMark from '../bookmark'
+import TagsList from '../../UI/tags/tagsList'
+import Time from '../time'
 
 const Article = ({
   _id,

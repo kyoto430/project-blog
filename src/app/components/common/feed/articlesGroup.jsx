@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Article from './article'
-import GroupHeader from './groupHeader'
+import GroupHeader from '../groupHeader'
 
 const ArticlesGroup = ({
   articles,

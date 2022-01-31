@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import _ from 'lodash'
-import Pagination from './pagination'
-import { paginate } from '../utils/paginate'
-import GroupList from './groupList'
-import SearchStatus from './searchStatus'
-import API from '../api'
+import Pagination from '../pagination'
+import { paginate } from '../../../utils/paginate'
+import GroupList from '../groupList'
+import SearchStatus from '../../UI/searchStatus'
+import API from '../../../api'
 import ArticlesGroup from './articlesGroup'
-import Loader from './loader'
+import Loader from '../loader'
 
 const ArticlesList = () => {
   const pageSize = 3
@@ -15,6 +15,7 @@ const ArticlesList = () => {
   const [selectedLigue, setSelectedLigue] = useState()
   const [sortBy, setSortBy] = useState({ iter: 'title', order: 'asc' })
   const [articles, setArticles] = useState()
+  const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
     API.articles.fetchAll().then((data) => setArticles(data))
@@ -26,7 +27,7 @@ const ArticlesList = () => {
 
   useEffect(() => {
     setCurrentPage(1)
-  }, [selectedLigue])
+  }, [selectedLigue, searchQuery])
 
   const handleDelete = (articleId) => {
     setArticles(articles.filter((article) => article._id !== articleId))
@@ -49,14 +50,25 @@ const ArticlesList = () => {
     setCurrentPage(pageIndex)
   }
   const handleLiguesSelect = (item) => {
+    if (searchQuery !== '') return setSearchQuery('')
     setSelectedLigue(item)
+  }
+  const handleSearchQuery = ({ target }) => {
+    setSelectedLigue(undefined)
+    setSearchQuery(target.value)
   }
   const clearFilter = () => {
     setSelectedLigue()
   }
 
   if (articles) {
-    const filteredArticles = selectedLigue
+    const filteredArticles = searchQuery
+      ? articles.filter(
+          (article) =>
+            article.title.toLowerCase().indexOf(searchQuery.toLowerCase()) !==
+            -1
+        )
+      : selectedLigue
       ? articles.filter(
           (article) =>
             JSON.stringify(article.ligue) === JSON.stringify(selectedLigue)
@@ -82,10 +94,19 @@ const ArticlesList = () => {
             <button className="btn btn-secondary mt-2" onClick={clearFilter}>
               Очистить
             </button>
+            <input
+              className="mt-1"
+              type="text"
+              name="searchQuery"
+              placeholder="Search..."
+              onChange={handleSearchQuery}
+              value={searchQuery}
+            ></input>
           </div>
         )}
         <div className="col-10 d-flex flex-column align-items-center p-3">
           <SearchStatus length={count} />
+
           {count > 0 && (
             <ArticlesGroup
               articles={articleCrop}

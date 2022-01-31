@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import ArticlePage from '../components/articlePage'
-import ArticlesList from '../components/articlesList'
+import ArticlePage from '../components/common/feed/articlePage'
+import ArticlesList from '../components/common/feed/articlesList'
 
 const Articles = () => {
   const params = useParams()
