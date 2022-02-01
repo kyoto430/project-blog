@@ -32,7 +32,7 @@ const Login = () => {
               <LoginForm />
               <p>
                 Don't have account?{' '}
-                <a a role="button" onClick={toggleFormType}>
+                <a role="button" onClick={toggleFormType}>
                   Sing Up
                 </a>
               </p>

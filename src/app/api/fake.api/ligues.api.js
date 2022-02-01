@@ -11,7 +11,7 @@ export const ligues = [
 const fetchAll = () =>
   new Promise((resolve) => {
     window.setTimeout(function () {
-      resolve(ligues)
+      resolve(liguesObject)
     }, 2000)
   })
 

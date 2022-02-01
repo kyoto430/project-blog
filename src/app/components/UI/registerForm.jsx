@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { validator } from '../../utils/validator'
 import TextField from '../common/form/textField'
 import API from '../../api'
+import SelectField from '../common/form/selectField'
 
 const RegisterForm = () => {
-  const [data, setData] = useState({ email: '', password: '', ligues: '' })
+  const [data, setData] = useState({ email: '', password: '', ligue: '' })
   const [errors, setErrors] = useState({})
   const [ligues, setLigues] = useState()
 
@@ -29,6 +30,9 @@ const RegisterForm = () => {
         message: 'Пароль должен содержать минимум из 8 символов',
         value: 8,
       },
+    },
+    ligue: {
+      isRequired: { message: 'Страна обязательна для заполнения' },
     },
   }
 
@@ -72,34 +76,15 @@ const RegisterForm = () => {
         onChange={handleChange}
         error={errors.password}
       />
-      <div className="mb-4">
-        <label htmlFor="validationServer04" className="form-label">
-          State
-        </label>
-        <select
-          className="form-select is-invalid"
-          id="validationServer04"
-          aria-describedby="validationServer04Feedback"
-          required
-        >
-          <option selected={data.ligue === ''} disabled value="">
-            Choose...
-          </option>
-          {ligues &&
-            Object.keys(ligues).map((ligueName) => (
-              <option
-                selected={ligues[ligueName]._id === data.ligue}
-                key={ligues[ligueName]._id}
-                value={ligues[ligueName]._id}
-              >
-                {ligues[ligueName].name}
-              </option>
-            ))}
-        </select>
-        <div id="validationServer04Feedback" className="invalid-feedback">
-          Please select a valid state.
-        </div>
-      </div>
+      <SelectField
+        label="Выберите страну"
+        defaultOption="Choose..."
+        onChange={handleChange}
+        options={ligues}
+        error={errors.ligue}
+        value={data.ligue}
+        name="ligue"
+      />
       <button
         type="submit"
         className="btn btn-primary w-100 mx-auto"

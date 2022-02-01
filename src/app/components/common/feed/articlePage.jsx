@@ -14,6 +14,9 @@ const ArticlePage = ({ articleId }) => {
   const handleBack = () => {
     history.push('/articles')
   }
+  const handleEdit = () => {
+    history.push(history.location.pathname + '/edit')
+  }
   if (article) {
     return (
       <div>
@@ -21,6 +24,7 @@ const ArticlePage = ({ articleId }) => {
         <h2>{article.text}</h2>
         <TagsList tags={article.tags} />
         <button onClick={handleBack}>Все статьи</button>
+        <button onClick={handleEdit}>Изменть</button>
       </div>
     )
   } else {

@@ -38,21 +38,56 @@ const articles = [
   },
 ]
 
+if (!localStorage.getItem('articles')) {
+  localStorage.setItem('articles', JSON.stringify(articles))
+}
+
 const fetchAll = () =>
   new Promise((resolve) => {
     window.setTimeout(function () {
-      resolve(articles)
+      resolve(JSON.parse(localStorage.getItem('articles')))
     }, 2000)
+  })
+const update = (id, data) =>
+  new Promise((resolve) => {
+    const articles = JSON.parse(localStorage.getItem('articles'))
+    const articleIndex = articles.findIndex((u) => u._id === id)
+    articles[articleIndex] = { ...articles[articleIndex], ...data }
+    localStorage.setItem('articles', JSON.stringify(articles))
+    resolve(articles[articleIndex])
   })
 
 const getById = (id) =>
   new Promise((resolve) => {
     window.setTimeout(function () {
-      resolve(articles.find((article) => article._id === id))
+      resolve(
+        JSON.parse(localStorage.getItem('articles')).find(
+          (article) => article._id === id
+        )
+      )
     }, 1000)
   })
-
 export default {
   fetchAll,
   getById,
+  update,
 }
+
+// const fetchAll = () =>
+//   new Promise((resolve) => {
+//     window.setTimeout(function () {
+//       resolve(articles)
+//     }, 2000)
+//   })
+
+// const getById = (id) =>
+//   new Promise((resolve) => {
+//     window.setTimeout(function () {
+//       resolve(articles.find((article) => article._id === id))
+//     }, 1000)
+//   })
+
+// export default {
+//   fetchAll,
+//   getById,
+// }

@@ -10,9 +10,9 @@ function App() {
     <div>
       <NavBar />
       <Switch>
-        <Route path="/" exact component={Main} />
+        <Route path="/articles/:articleId?/:edit?" component={Articles} />
         <Route path="/login/:type?" component={Login} />
-        <Route path="/articles/:articleId?" component={Articles} />
+        <Route path="/" exact component={Main} />
       </Switch>
       <Redirect to="/" />
     </div>
