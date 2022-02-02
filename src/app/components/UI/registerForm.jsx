@@ -48,8 +48,8 @@ const RegisterForm = () => {
 
   const isValid = Object.keys(errors).length === 0
 
-  const handleChange = (e) => {
-    setData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }))
+  const handleChange = (target) => {
+    setData((prevState) => ({ ...prevState, [target.name]: target.value }))
   }
 
   const handleSubmit = (e) => {

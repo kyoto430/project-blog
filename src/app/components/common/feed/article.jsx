@@ -17,10 +17,15 @@ const Article = ({
   onToggleBookMark,
 }) => {
   return (
-    <div key={_id} className="card text-white bg-dark m-3">
+    <div className="card text-white bg-dark m-3 w-100">
       <div className="row g-0">
         <div className="col-md-4">
-          <img src={image} className="img-fluid rounded-start" alt={title} />
+          <img
+            src={image}
+            className="img-fluid rounded-start"
+            alt={title}
+            style={{ width: '250px' }}
+          />
         </div>
         <div className="col-md-8 d-flex align-items-center">
           <div className="card-body">

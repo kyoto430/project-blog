@@ -19,12 +19,36 @@ const ArticlePage = ({ articleId }) => {
   }
   if (article) {
     return (
-      <div>
-        <h1>{article.title}</h1>
-        <h2>{article.text}</h2>
-        <TagsList tags={article.tags} />
-        <button onClick={handleBack}>Все статьи</button>
-        <button onClick={handleEdit}>Изменть</button>
+      <div className="d-flex flex-column container shadow p-3 mb-5 bg-body text-white rounded">
+        <div className="d-flex justify-content-between">
+          <span>
+            <button className="btn btn-sm btn-primary m-1" onClick={handleBack}>
+              Назад <i className="bi bi-arrow-return-left"></i>
+            </button>
+          </span>
+          <div>
+            <TagsList tags={article.tags} />
+          </div>
+        </div>
+        <div className="d-flex bd-highlight">
+          <div className="p-2 flex-grow-1 bd-highlight">
+            <h1 className="text-center">{article.title}</h1>
+            <p>{article.text}</p>
+          </div>
+          <div className="p-2 bd-highlight text-center">
+            <img
+              className="img-fluid"
+              src={article.image}
+              alt={article.title}
+            />
+            <button
+              className="btn btn-sm btn-secondary m-1"
+              onClick={handleEdit}
+            >
+              Редактировать <i className="bi bi-gear"></i>
+            </button>
+          </div>
+        </div>
       </div>
     )
   } else {

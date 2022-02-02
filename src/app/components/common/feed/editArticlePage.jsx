@@ -4,6 +4,9 @@ import { validator } from '../../../utils/validator'
 import API from '../../../api'
 import TextField from '../form/textField'
 import SelectField from '../form/selectField'
+import MultiSelectField from '../form/MultiSelectField'
+import CheckBoxField from '../form/checkBoxField'
+import TextAreaField from '../form/textAreaField'
 
 const EditArticlePage = () => {
   const { articleId } = useParams()
@@ -15,14 +18,16 @@ const EditArticlePage = () => {
     ligue: '',
     update: '',
     tags: [],
+    bookmark: false,
+    image: '',
   })
   const [ligues, setLigues] = useState([])
   const [tags, setTags] = useState({})
   const [errors, setErrors] = useState({})
-  const getLigueById = (id) => {
+  const getLigueById = (name) => {
     for (const lig in ligues) {
       const ligData = ligues[lig]
-      if (ligData._id === id) return ligData
+      if (ligData.name === name) return ligData
     }
   }
   const getTags = (elements) => {
@@ -52,7 +57,7 @@ const EditArticlePage = () => {
     console.log(data)
   }
   const transformData = (data) => {
-    return data.map((lig) => ({ label: lig.title, value: lig._id }))
+    return data.map((tag) => ({ label: tag.name, value: tag._id }))
   }
   useEffect(() => {
     setIsLoading(true)
@@ -61,7 +66,7 @@ const EditArticlePage = () => {
         ...prevState,
         ...data,
         tags: transformData(tags),
-        ligue: ligue._id,
+        ligue: ligue.name,
       }))
     )
     API.tags.fetchAll().then((data) => setTags(data))
@@ -77,10 +82,13 @@ const EditArticlePage = () => {
         message: 'Введите название',
       },
     },
+    ligue: {
+      isRequired: { message: 'Страна обязательна для заполнения' },
+    },
   }
   useEffect(() => validate(), [data])
-  const handleChange = (e) => {
-    setData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }))
+  const handleChange = (target) => {
+    setData((prevState) => ({ ...prevState, [target.name]: target.value }))
   }
   const validate = () => {
     const errors = validator(data, validatorConfig)
@@ -96,21 +104,53 @@ const EditArticlePage = () => {
           {!isLoading && Object.keys(ligues).length > 0 ? (
             <form onSubmit={handleSubmit}>
               <TextField
-                label="title"
+                label="Заголовок статьи"
                 name="title"
                 value={data.title}
                 onChange={handleChange}
                 error={errors.title}
               />
+              <TextAreaField
+                label="Полный текст статьи"
+                name="text"
+                value={data.text}
+                onChange={handleChange}
+              />
               <SelectField
                 label="Выберите лигу"
-                defaultOption="Choose..."
-                options={ligues}
+                defaultOption="Выберите..."
                 onChange={handleChange}
-                value={data.ligue}
+                options={ligues}
                 error={errors.ligue}
+                value={data.ligue}
                 name="ligue"
               />
+              <MultiSelectField
+                defalutValue={data.tags}
+                options={tags}
+                onChange={handleChange}
+                name="tags"
+                label="Выберите теги"
+              />
+              <TextField
+                label="Время обновления"
+                name="update"
+                value={data.update}
+                onChange={handleChange}
+              />
+              <TextField
+                label="URL изображения"
+                name="image"
+                value={data.image}
+                onChange={handleChange}
+              />
+              <CheckBoxField
+                value={data.bookmark}
+                onChange={handleChange}
+                name="bookmark"
+              >
+                Добавить в избранное
+              </CheckBoxField>
               <button
                 type="submit"
                 disabled={!isValid}

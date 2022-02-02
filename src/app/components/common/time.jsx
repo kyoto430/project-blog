@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 
 const Time = ({ update }) => {
   const renderTime = (number) => {
-    const convertToHours = Math.floor(number / 60)
-    if (number >= 60) {
+    const convertToHours = Math.floor(Number(number) / 60)
+    if (Number(number) >= 60) {
       return `${convertToHours} ${convertToHours === 1 ? 'hour' : 'hours'}`
     } else {
-      return `${number} ${number === 1 ? 'min' : 'mins'}`
+      return `${Number(number)} ${Number(number) === 1 ? 'min' : 'mins'}`
     }
   }
   return (
@@ -20,7 +20,7 @@ const Time = ({ update }) => {
 }
 
 Time.propTypes = {
-  update: PropTypes.number,
+  update: PropTypes.string,
 }
 
 export default Time
