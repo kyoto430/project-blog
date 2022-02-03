@@ -56,7 +56,19 @@ const update = (id, data) =>
     localStorage.setItem('articles', JSON.stringify(articles))
     resolve(articles[articleIndex])
   })
-
+const add = (data) =>
+  new Promise((resolve) => {
+    window.setTimeout(function () {
+      const articles = JSON.parse(localStorage.getItem('articles'))
+      const newArticle = {
+        ...data,
+        _id: Math.random().toString(36).substr(2, 9),
+      }
+      articles.push(newArticle)
+      localStorage.setItem('articles', JSON.stringify(articles))
+      resolve(newArticle)
+    }, 200)
+  })
 const getById = (id) =>
   new Promise((resolve) => {
     window.setTimeout(function () {
@@ -71,6 +83,7 @@ export default {
   fetchAll,
   getById,
   update,
+  add,
 }
 
 // const fetchAll = () =>

@@ -9,7 +9,7 @@ import CheckBoxField from '../form/checkBoxField'
 import TextAreaField from '../form/textAreaField'
 import Loader from '../loader'
 
-const EditArticlePage = () => {
+const AddArticlePage = () => {
   const { articleId } = useParams()
   const history = useHistory()
   const [isLoading, setIsLoading] = useState(false)
@@ -25,6 +25,7 @@ const EditArticlePage = () => {
   const [ligues, setLigues] = useState([])
   const [tags, setTags] = useState({})
   const [errors, setErrors] = useState({})
+
   const getLigueById = (name) => {
     for (const lig in ligues) {
       const ligData = ligues[lig]
@@ -43,54 +44,41 @@ const EditArticlePage = () => {
     return tagsArray
   }
 
+  useEffect(() => {
+    API.tags.fetchAll().then((data) => setTags(data))
+    API.ligues.fetchAll().then((data) => setLigues(data))
+  }, [])
+
+  const validatorConfig = {
+    title: {
+      isRequired: { message: 'Заголовок обязателен для заполнения' },
+    },
+    text: {
+      isRequired: { message: 'Текст обязателен для заполнения' },
+    },
+    ligue: {
+      isRequired: { message: 'Страна обязательна для заполнения' },
+    },
+    update: {
+      isRequired: { message: 'Время обновления обязательно для заполнения' },
+    },
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     const isValid = validate()
     if (!isValid) return
     const { ligue, tags } = data
     API.articles
-      .update(articleId, {
-        ...data,
-        ligue: getLigueById(ligue),
-        tags: getTags(tags),
-      })
-      .then((data) => history.push(`/articles/${data._id}`))
+      .add({ ...data, ligue: getLigueById(ligue), tags: getTags(tags) })
+      .then((data) => history.push(`/articles`))
     console.log(data)
   }
-  const transformData = (data) => {
-    return data.map((tag) => ({ label: tag.name, value: tag._id }))
-  }
+
   useEffect(() => {
-    setIsLoading(true)
-    API.articles.getById(articleId).then(({ ligue, tags, ...data }) =>
-      setData((prevState) => ({
-        ...prevState,
-        ...data,
-        tags: transformData(tags),
-        ligue: ligue.name,
-      }))
-    )
-    API.tags.fetchAll().then((data) => setTags(data))
-    API.ligues.fetchAll().then((data) => setLigues(data))
-  }, [])
-  useEffect(() => {
-    if (data._id) setIsLoading(false)
+    validate()
   }, [data])
 
-  const validatorConfig = {
-    title: {
-      isRequired: {
-        message: 'Введите название',
-      },
-    },
-    ligue: {
-      isRequired: { message: 'Страна обязательна для заполнения' },
-    },
-  }
-  useEffect(() => validate(), [data])
-  const handleChange = (target) => {
-    setData((prevState) => ({ ...prevState, [target.name]: target.value }))
-  }
   const validate = () => {
     const errors = validator(data, validatorConfig)
     setErrors(errors)
@@ -98,6 +86,11 @@ const EditArticlePage = () => {
   }
 
   const isValid = Object.keys(errors).length === 0
+
+  const handleChange = (target) => {
+    setData((prevState) => ({ ...prevState, [target.name]: target.value }))
+  }
+
   return (
     <div className="container mt-5">
       <div className="row">
@@ -116,6 +109,7 @@ const EditArticlePage = () => {
                 name="text"
                 value={data.text}
                 onChange={handleChange}
+                error={errors.text}
               />
               <SelectField
                 label="Выберите лигу"
@@ -138,6 +132,7 @@ const EditArticlePage = () => {
                 name="update"
                 value={data.update}
                 onChange={handleChange}
+                error={errors.update}
               />
               <TextField
                 label="URL изображения"
@@ -157,7 +152,7 @@ const EditArticlePage = () => {
                 disabled={!isValid}
                 className="btn btn-primary w-100 mx-auto"
               >
-                Обновить
+                Добавить
               </button>
             </form>
           ) : (
@@ -169,4 +164,4 @@ const EditArticlePage = () => {
   )
 }
 
-export default EditArticlePage
+export default AddArticlePage

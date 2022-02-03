@@ -16,6 +16,8 @@ const Article = ({
   bookmark,
   onToggleBookMark,
 }) => {
+  const shortText = text.length / 2
+  console.log(shortText)
   return (
     <div className="card text-white bg-dark m-3 w-100">
       <div className="row g-0">
@@ -34,7 +36,10 @@ const Article = ({
               <TagsList tags={tags} />
             </div>
             <h5 className="card-title">{title}</h5>
-            <p className="card-text">{text}</p>
+            <p className="card-text">
+              {text.slice(0, text.length > 30 ? text.length / 2 : text.length) +
+                '...'}
+            </p>
             <Time update={update} />
             <div className="d-flex justify-content-between align-items-center">
               <Link to={`/articles/${_id}`}>

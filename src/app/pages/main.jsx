@@ -1,7 +1,8 @@
 import React from 'react'
+import AddArticlePage from '../components/common/feed/addArticlePage'
 
 const Main = () => {
-  return <h1>Main page</h1>
+  return <AddArticlePage />
 }
 
 export default Main
