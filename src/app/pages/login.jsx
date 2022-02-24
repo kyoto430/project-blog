@@ -17,23 +17,23 @@ const Login = () => {
         <div className="col-md-6 offset-md-3 p-4 shadow">
           {formType === 'register' ? (
             <>
-              <h3 className="mb-4">Register</h3>
+              <h3 className="mb-4">Регистрация</h3>
               <RegisterForm />
               <p>
-                Alredy have account?{' '}
+              Уже есть аккаунт?
                 <a role="button" onClick={toggleFormType}>
-                  Sing In
+                  Войти
                 </a>
               </p>
             </>
           ) : (
             <>
-              <h3 className="mb-4">Login</h3>
+              <h3 className="mb-4">Вход</h3>
               <LoginForm />
               <p>
-                Don't have account?{' '}
+                Нет аккаунта?
                 <a role="button" onClick={toggleFormType}>
-                  Sing Up
+                  Зарегестрироваться
                 </a>
               </p>
             </>

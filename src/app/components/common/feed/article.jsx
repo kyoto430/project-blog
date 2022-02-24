@@ -16,8 +16,6 @@ const Article = ({
   bookmark,
   onToggleBookMark,
 }) => {
-  const shortText = text.length / 2
-  console.log(shortText)
   return (
     <div className="card text-white bg-dark m-3 w-100">
       <div className="row g-0">

@@ -53,14 +53,14 @@ const LoginForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <TextField
-        label="электронная почта"
+        label="Электронная почта"
         name="email"
         value={data.email}
         onChange={handleChange}
         error={errors.email}
       />
       <TextField
-        label="пароль"
+        label="Пароль"
         type="password"
         name="password"
         value={data.password}
@@ -75,7 +75,7 @@ const LoginForm = () => {
         className="btn btn-primary w-100 mx-auto"
         disabled={!isValid}
       >
-        Submit
+        Отправить
       </button>
     </form>
   )

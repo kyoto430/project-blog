@@ -19,7 +19,7 @@ const ArticlePage = ({ articleId }) => {
   }
   if (article) {
     return (
-      <div className="d-flex flex-column container shadow p-3 mb-5 bg-body text-white rounded">
+      <div className="d-flex flex-column container shadow p-3 mb-5 bg-dark text-white rounded">
         <div className="d-flex justify-content-between">
           <span>
             <button className="btn btn-sm btn-primary m-1" onClick={handleBack}>

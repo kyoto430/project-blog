@@ -62,14 +62,14 @@ const RegisterForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <TextField
-        label="электронная почта"
+        label="Электронная почта"
         name="email"
         value={data.email}
         onChange={handleChange}
         error={errors.email}
       />
       <TextField
-        label="пароль"
+        label="Пароль"
         type="password"
         name="password"
         value={data.password}
@@ -78,7 +78,7 @@ const RegisterForm = () => {
       />
       <SelectField
         label="Выберите страну"
-        defaultOption="Choose..."
+        defaultOption="Выбор..."
         onChange={handleChange}
         options={ligues}
         error={errors.ligue}
@@ -90,7 +90,7 @@ const RegisterForm = () => {
         className="btn btn-primary w-100 mx-auto"
         disabled={!isValid}
       >
-        Submit
+        Отправить
       </button>
     </form>
   )
