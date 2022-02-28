@@ -23,6 +23,7 @@ div {
 }
 
 #root {
+  background-color: #000;
   background-image: url("https://ic.pics.livejournal.com/rubin65/15990693/1299024/1299024_original.png");
   background-repeat: no-repeat;
   background-size: cover;

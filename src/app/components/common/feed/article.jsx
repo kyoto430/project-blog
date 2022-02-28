@@ -24,7 +24,7 @@ const Article = ({
             src={image}
             className="img-fluid rounded-start"
             alt={title}
-            style={{ width: '250px' }}
+            style={{ width: '550px' }}
           />
         </div>
         <div className="col-md-8 d-flex align-items-center">
@@ -35,7 +35,7 @@ const Article = ({
             </div>
             <h5 className="card-title">{title}</h5>
             <p className="card-text">
-              {text.slice(0, text.length > 30 ? text.length / 2 : text.length) +
+              {text && text.slice(0, text.length > 30 ? text.length / 10 : text.length) +
                 '...'}
             </p>
             <Time update={update} />
