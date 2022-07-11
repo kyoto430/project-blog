@@ -19,7 +19,7 @@ const Article = ({
   return (
     <div className="card text-white bg-dark m-3 w-100">
       <div className="row g-0">
-        <div className="col-md-4">
+        <div className="col-md-4 d-flex align-items-center">
           <img
             src={image}
             className="img-fluid rounded-start"
@@ -35,8 +35,11 @@ const Article = ({
             </div>
             <h5 className="card-title">{title}</h5>
             <p className="card-text">
-              {text && text.slice(0, text.length > 30 ? text.length / 10 : text.length) +
-                '...'}
+              {text &&
+                text.slice(
+                  0,
+                  text.length > 30 ? text.length / 10 : text.length
+                ) + '...'}
             </p>
             <Time update={update} />
             <div className="d-flex justify-content-between align-items-center">

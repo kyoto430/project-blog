@@ -5,7 +5,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
 
 code {
@@ -24,11 +23,10 @@ div {
 
 #root {
   background-color: #000;
-  background-image: url("https://ic.pics.livejournal.com/rubin65/15990693/1299024/1299024_original.png");
+  background-image: url('https://ic.pics.livejournal.com/rubin65/15990693/1299024/1299024_original.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   min-height: 100vh;
-  
 }
